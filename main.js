@@ -1,11 +1,7 @@
 // Make your global array here.
 // Put a few todos in there to start with!
 // This is mostly for testing purposes.
-const todos = [
-  `Be able to mark todos "done".`,
-  `Allow user interaction through the DOM`,
-  `Add dates to todos.`,
-];
+const todos = [];
 
 // Rewrite your print todo function to put the todo on the dom instead of in the console.
 function printTodo(todo) {
@@ -39,6 +35,10 @@ function addToList() {
   addTodo(userInput);
 
   // Now use that print function to add the todo to the dom!
+  printTodo(userInput);
+
+  // Optionally but helpfully, set that input box's value back to an empty string to empty the box so you can type a different todo in there.
+  inputBox.value = '';
 
 }
 
@@ -51,7 +51,7 @@ removeButton.onclick = removeFromList;
 // Now write the function that the event listener will run. It will take what's in the user input and remove it from the todo list array.
 function removeFromList() {
   // Place in a variable the node element for the remove todo input box.
-  const inputBox = document.querySelector('index-input');
+  const inputBox = document.querySelector('.index-input');
 
   // Place in a variable the text that the user typed into that input box.
   const userInput = inputBox.value;
@@ -60,13 +60,14 @@ function removeFromList() {
   removeTodo(userInput);
   
   // Here's where we'll add some code in a minute, but... not yet!
-
+  clearList();
+  printList();
 }
 
 // Write a function that erases everything from the list.
 function clearList() {
   // Grab the todo list ul and put it in a variable
-  const list = document.querySelector('#todo-list');
+  const list = document.querySelector('.todo-list');
 
   // Remove all children of that list.
   // My favorite way uses `.hasChildNodes()` and `.remove()` and `.firstChild`, but there are other ways if you wanna research them instead!
