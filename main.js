@@ -7,6 +7,22 @@ const todos = [
   `Add dates to todos.`,
 ];
 
+// Rewrite your print todo function to put the todo on the dom instead of in the console.
+function printTodo(todo) {
+  // Use `document.createElement` to make an li
+  const li = document.createElement('li');
+
+  // Put that todo string that you took in as a parameter as text inside the li tag. Don't use innerHTML!
+  li.innerText = todo;
+
+  // Put the ul that's already in our html file in a variable.
+  const ul = document.querySelector('.todo-list');
+
+  // Append the li we made to the ul as the last child.
+  ul.appendChild(li);
+}
+
+
 // Add an event listener to the ADD button to run a function that we'll write shortly that adds todos.
 const addButton = document.querySelector('.add-todo');
 addButton.onclick = addToList;
@@ -19,11 +35,11 @@ function addToList() {
   // Place in a variable the text that the user typed into that input box. You can "dot off" the variable above to find a property that's on that element. If you're not sure if you have it, try console logging what you've got!
   const userInput = inputBox.value;
 
-  // Now put that variable in your todo list. You have a function for that!
+  // Now put that todo string in your todo list. You have a function for that!
   addTodo(userInput);
-  
-  // For now, call your function that prints the whole list to see if it was added.
-  printList();
+
+  // Now use that print function to add the todo to the dom!
+
 }
 
 
@@ -43,18 +59,29 @@ function removeFromList() {
   // Remove the todo at that index from the array. We have a function for that!
   removeTodo(userInput);
   
-  // For now, call your function that prints the whole list to see if it was added.
-  printList();
+  // Here's where we'll add some code in a minute, but... not yet!
+
 }
 
-// Write a function that adds an li
+// Write a function that erases everything from the list.
+function clearList() {
+  // Grab the todo list ul and put it in a variable
+  const list = document.querySelector('#todo-list');
 
-
-// A function that prints a todo.
-// For now, just console log it!
-function printTodo(todo) {
-  console.log(todo);
+  // Remove all children of that list.
+  // My favorite way uses `.hasChildNodes()` and `.remove()` and `.firstChild`, but there are other ways if you wanna research them instead!
+  while (list.hasChildNodes()) {
+    list.firstChild.remove();
+  }
 }
+
+// NOW. You can go back up two functions to where we left off in our remove-one-item-from-the-list function, run your erase-everything-from-the-list function, and then call your function that prints everything individually.
+// That print function should be calling your print-one-item function, and if that's adding it to the list, you've got it!
+// The way I named functions, this means now adding only two lines back up there:
+// clearList();
+// printList();
+
+
 
 // A function that prints everything on our todo list, INDIVIDUALLY.
 // Make SURE to use the above function!
